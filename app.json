@@ -1,0 +1,5 @@
+{
+  "name": "Kotlin hub",
+  "description": "Hub for iot sensors",
+  "addons": [ "heroku-postgresql" ]
+}
