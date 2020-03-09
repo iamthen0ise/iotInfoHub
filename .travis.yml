@@ -3,7 +3,7 @@ language: java
 before_install:
 - chmod +x gradlew
 
-script: ./gradlew clean build jacoco:report coveralls:report
+script: ./gradlew clean build
 cache:
      directories:
      - node_modules 
