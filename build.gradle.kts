@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 val ktor_version: String by project
@@ -39,9 +37,11 @@ dependencies {
     implementation("io.ktor", "ktor-auth-jwt", "$ktor_version")
     implementation("io.ktor", "ktor-serialization", "$ktor_version")
 
-    implementation("org.jetbrains.exposed", "exposed-core", "0.21.1")
-    implementation("org.jetbrains.exposed", "exposed-dao", "0.21.1")
-    implementation("org.jetbrains.exposed", "exposed-jdbc", "0.21.1")
+    implementation("org.jetbrains.exposed", "exposed", "0.12.1")
+    implementation("com.zaxxer", "HikariCP", "2.7.8")
+    implementation("org.postgresql", "postgresql", "42.2.2")
+
+    implementation("org.flywaydb", "flyway-core", "5.2.4")
 
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
 }
