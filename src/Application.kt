@@ -25,7 +25,9 @@ fun Application.module() {
         serialization()
     }
 
-    DatabaseFactory.init()
+    if (System.getenv("stage") == "PROD") {
+        DatabaseFactory.init()
+    }
 
     install(CORS)
     {
