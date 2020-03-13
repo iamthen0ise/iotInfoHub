@@ -2,10 +2,7 @@ package com.github.iamthen0ise.models
 
 
 import com.github.iamthen0ise.DatabaseFactory.dbQuery
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class TemperatureService {
@@ -21,6 +18,7 @@ class TemperatureService {
         val messages: ArrayList<Temperature> = arrayListOf()
         transaction {
             TemperatureData.selectAll()
+                .orderBy(TemperatureData.date to SortOrder.DESC)
                 .limit(10)
                 .map {
                     messages.add(
