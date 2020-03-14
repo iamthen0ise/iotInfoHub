@@ -5,11 +5,8 @@ import com.github.iamthen0ise.models.TemperatureService
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.response.respondText
@@ -29,19 +26,8 @@ fun Application.module() {
         DatabaseFactory.init()
     }
 
-    install(CORS)
-    {
-        method(HttpMethod.Options)
-        header(HttpHeaders.XForwardedProto)
-        anyHost()
-        host("localhost:8081")
-        host("localhost:8080")
-        allowCredentials = true
-        allowNonSimpleContentTypes = true
-    }
-
     routing {
-        get("/") {
+        get("/healtcheck") {
             call.respond("ok")
         }
 
@@ -66,8 +52,10 @@ fun Application.module() {
         }
 
         get("/api/temp") {
+            val page = call.parameters.get("page") ?: "1"
+            val limit = call.parameters.get("limit") ?: "10"
             call.respond(
-                TemperatureService().getAll()
+                TemperatureService().getAll(page, limit)
             )
         }
     }

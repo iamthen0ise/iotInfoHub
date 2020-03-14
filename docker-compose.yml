@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres:
+    container_name: "db"
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+
+
+  ktor:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    env_file: .env
+    entrypoint: ["bash", "/app/deploy/wait-for-postgres.sh", "postgres",
+                 "bash", "/app/deploy/entrypoint.sh"]

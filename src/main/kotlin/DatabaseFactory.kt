@@ -3,7 +3,6 @@ package com.github.iamthen0ise
 import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.config.HoconApplicationConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.flywaydb.core.Flyway
@@ -12,10 +11,10 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 
 object DatabaseFactory {
-    private val appConfig = HoconApplicationConfig(ConfigFactory.load())
-    private val dbUrl = appConfig.property("db.DATABASE_URL").getString()
-    private val dbUser = appConfig.property("db.POSTGRES_USER").getString()
-    private val dbPassword = appConfig.property("db.POSTGRES_PASS").getString()
+    private val appConfig = ConfigFactory.load()
+    private val dbUrl = appConfig.getString("db.DATABASE_URL")
+    private val dbUser = appConfig.getString("db.POSTGRES_USER")
+    private val dbPassword = appConfig.getString("db.POSTGRES_PASS")
 
     fun init() {
         Database.connect(hikari())

@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "com.github.iamthen0ise"
-version = "0.0.1"
+version = "stable"
 
 application {
     mainClassName = "io.ktor.server.netty.EngineMain"

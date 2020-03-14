@@ -14,12 +14,13 @@ class TemperatureService {
     }
 
 
-    suspend fun getAll(): ArrayList<Temperature> = dbQuery {
+    suspend fun getAll(page: String, limit: String): ArrayList<Temperature> = dbQuery {
         val messages: ArrayList<Temperature> = arrayListOf()
+        val offset = page.toInt() * limit.toInt()
         transaction {
             TemperatureData.selectAll()
                 .orderBy(TemperatureData.date to SortOrder.DESC)
-                .limit(10)
+                .limit(limit.toInt(), offset = offset)
                 .map {
                     messages.add(
                         Temperature(
