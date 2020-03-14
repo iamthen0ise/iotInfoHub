@@ -5,8 +5,12 @@ import com.github.iamthen0ise.models.TemperatureService
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
+import io.ktor.features.maxAge
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.response.respondText
@@ -20,6 +24,15 @@ import java.time.format.DateTimeFormatter
 fun Application.module() {
     install(ContentNegotiation) {
         serialization()
+    }
+    install(CORS)
+    {
+        method(HttpMethod.Options)
+        header(HttpHeaders.XForwardedProto)
+        anyHost()
+        host("localhost")
+        allowCredentials = true
+        allowNonSimpleContentTypes = true
     }
 
     DatabaseFactory.init()
