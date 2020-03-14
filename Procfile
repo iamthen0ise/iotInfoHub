@@ -1,1 +1,1 @@
-web: java -jar build/libs/shadow-0.0.1.jar
+web: java -jar build/libs/shadow-stable.jar
