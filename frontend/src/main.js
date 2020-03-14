@@ -9,7 +9,7 @@ new Vue({
   render: h => h(App),
   mounted() {
     axios
-      .get(process.env.API_ENDPOINT)
+      .get("https://still-mountain-17725.herokuapp.com/api/temp?limit=100&page=-1")
       .then(response => {
         this.dates = response.data.map(list => {
           return list.date;
