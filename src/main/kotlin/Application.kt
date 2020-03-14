@@ -22,9 +22,8 @@ fun Application.module() {
         serialization()
     }
 
-    if (System.getenv("stage") == "PROD") {
-        DatabaseFactory.init()
-    }
+    DatabaseFactory.init()
+
 
     routing {
         get("/healthcheck") {

@@ -11,18 +11,23 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 
 object DatabaseFactory {
-    private val appConfig = ConfigFactory.load()
-    private val dbUrl = appConfig.getString("db.DATABASE_URL")
-    private val dbUser = appConfig.getString("db.POSTGRES_USER")
-    private val dbPassword = appConfig.getString("db.POSTGRES_PASS")
+    var TESTING = false
 
     fun init() {
-        Database.connect(hikari())
+        if (TESTING) {
+            return
+        }
+        val appConfig = ConfigFactory.load()
+        val dbUrl = appConfig.getString("db.DATABASE_URL")
+        val dbUser = appConfig.getString("db.POSTGRES_USER")
+        val dbPassword = appConfig.getString("db.POSTGRES_PASS")
+
+        Database.connect(hikari(dbUrl, dbUser, dbPassword))
         val flyway = Flyway.configure().dataSource(dbUrl, dbUser, dbPassword).load()
         flyway.migrate()
     }
 
-    private fun hikari(): HikariDataSource {
+    private fun hikari(dbUrl: String, dbUser: String, dbPassword: String): HikariDataSource {
         val config = HikariConfig()
         config.driverClassName = "org.postgresql.Driver"
         config.jdbcUrl = dbUrl
