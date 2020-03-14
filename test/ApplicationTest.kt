@@ -9,9 +9,9 @@ import kotlin.test.assertEquals
 
 class ApplicationTest {
     @Test
-    fun testRoot() {
+    fun testHealth() {
         withTestApplication({ module() }) {
-            handleRequest(HttpMethod.Get, "/").apply {
+            handleRequest(HttpMethod.Get, "healthcheck").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
             }
         }

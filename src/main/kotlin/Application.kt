@@ -27,7 +27,7 @@ fun Application.module() {
     }
 
     routing {
-        get("/healtcheck") {
+        get("/healthcheck") {
             call.respond("ok")
         }
 
