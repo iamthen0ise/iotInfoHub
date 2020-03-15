@@ -26,9 +26,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - name: Zip Folder
-      run: zip -r release.zip . -x "frontend/dist/*"
+      run: zip -r release.zip frontend/dist
     - name: Upload build artifact
       uses: actions/upload-artifact@v1
       with:
-        name: release.zip
-        path: release.zip
+        name: release-${{GITHUB_SHA}}.zip
+        path: release-${{GITHUB_SHA}}.zip
