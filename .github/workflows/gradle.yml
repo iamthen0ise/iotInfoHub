@@ -24,7 +24,7 @@ jobs:
       run: ./gradlew clean build test
 
     - name: Publish artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: app.jar
-          path: build/libs/shadow-stable.jar
+      uses: actions/upload-artifact@v1
+      with:
+        name: app.jar
+        path: build/libs/shadow-stable.jar
