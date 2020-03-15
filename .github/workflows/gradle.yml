@@ -28,7 +28,7 @@ jobs:
     - name: Deploy
       uses: s0/git-publish-subdir-action@master
       env:
-        REPO: git@github.com:yt04ka/iotInfoHub.git
+        REPO: self
         BRANCH: deploy
         FOLDER: build/libs
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
