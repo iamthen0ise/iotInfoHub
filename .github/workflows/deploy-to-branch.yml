@@ -78,7 +78,7 @@ jobs:
           path: dist/release.zip
 
       - name: Unzip Statics
-        run: cd dist && unzip release.zip
+        run: unzip dist/release.zip
 
       - name: Promote
         uses: s0/git-publish-subdir-action@master
