@@ -67,7 +67,7 @@ jobs:
           # Artifact name
           name: app.jar
           # Destination path
-          path: dist/app.jar
+          path: deploy/app.jar
 
       - name: Download Statics artifact
         uses: actions/download-artifact@v1.0.0
@@ -78,14 +78,14 @@ jobs:
           path: .
 
       - name: Unzip Statics
-        run: unzip release.zip -d dist/
+        run: unzip release.zip -d deploy/
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@master
         env:
           REPO: self
           BRANCH: make-new
-          FOLDER: dist
+          FOLDER: deply
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Purge artifacts
