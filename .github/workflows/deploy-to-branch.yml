@@ -85,7 +85,7 @@ jobs:
         run: mkdir deploy/public_html/
 
       - name: Move static
-        run: mv deploy/frontend/dist/ deploy/public_html/
+        run:  mv frontend/dist/* deploy/public_html
 
       - name: Rename jar artifact
         run: mv deploy/shadow-stable.jar deploy/iotInfoHub-1.0.0.jar
