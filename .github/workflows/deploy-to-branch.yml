@@ -12,7 +12,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build Kotlin app:
+  build_kotlin:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
           name: app.jar
           path: build/libs/shadow-stable.jar
 
-  build Node app:
+  build-node:
     runs-on: ubuntu-latest
 
     strategy:
@@ -54,6 +54,7 @@ jobs:
           path: release.zip
 
   deploy:
+    needs: [build_kotlin, build-node]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -66,7 +67,7 @@ jobs:
           # Artifact name
           name: app.jar
           # Destination path
-          path: .
+          path: dist/app.jar
 
       - name: Download Statics artifact
         uses: actions/download-artifact@v1.0.0
@@ -79,12 +80,12 @@ jobs:
       - name: Unzip Statics
         run: unzip release.zip -d dist/
 
-      - name: Promote
+      - name: Deploy
         uses: s0/git-publish-subdir-action@master
         env:
           REPO: self
-          BRANCH: deploy
-          FOLDER: .
+          BRANCH: make-new
+          FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Purge artifacts
