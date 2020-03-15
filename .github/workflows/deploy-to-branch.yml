@@ -80,7 +80,7 @@ jobs:
       - name: Unzip Statics
         run: unzip release.zip -d dist/
 
-      - name: Promote
+      - name: Deploy
         uses: s0/git-publish-subdir-action@master
         env:
           REPO: self
