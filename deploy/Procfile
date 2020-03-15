@@ -1,1 +1,1 @@
-web: java -jar dist/shadow-stable.jar
+web: java -jar shadow-stable.jar
