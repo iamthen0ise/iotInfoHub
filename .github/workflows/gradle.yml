@@ -24,8 +24,11 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew clean build test
-    - name: Publish artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: app.jar
-        path: build/libs/shadow-stable.jar
+
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@master
+      env:
+        REPO: git@github.com:yt04ka/iotInfoHub.git
+        BRANCH: deploy
+        FOLDER: build/libs
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
