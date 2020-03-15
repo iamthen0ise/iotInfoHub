@@ -60,6 +60,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v2
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Download Gradle artifact
         uses: actions/download-artifact@v1.0.0
@@ -67,7 +68,7 @@ jobs:
           # Artifact name
           name: app.jar
           # Destination path
-          path: deploy/app.jar
+          path: deploy/
 
       - name: Download Statics artifact
         uses: actions/download-artifact@v1.0.0
@@ -85,7 +86,7 @@ jobs:
         env:
           REPO: self
           BRANCH: make-new
-          FOLDER: deply
+          FOLDER: deploy
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Purge artifacts
