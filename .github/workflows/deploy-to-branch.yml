@@ -75,10 +75,10 @@ jobs:
           # Artifact name
           name: release.zip
           # Destination path
-          path: dist/release.zip
+          path: .
 
       - name: Unzip Statics
-        run: unzip dist/release.zip
+        run: unzip dist/release.zip -d dist/
 
       - name: Promote
         uses: s0/git-publish-subdir-action@master
