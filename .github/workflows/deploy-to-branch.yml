@@ -81,7 +81,7 @@ jobs:
       - name: Unzip Statics
         run: unzip release.zip -d deploy/
 
-      -name: Rename jar artifact
+      - name: Rename jar artifact
         run: mv deploy/shadow-stable.jar deploy/iotInfoHub-1.0.0.jar
 
       - name: Deploy
