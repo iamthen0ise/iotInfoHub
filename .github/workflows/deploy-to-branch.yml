@@ -12,7 +12,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build Kotlin app:
+  build_kotlin:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
           name: app.jar
           path: build/libs/shadow-stable.jar
 
-  build Node app:
+  build-node:
     runs-on: ubuntu-latest
 
     strategy:
