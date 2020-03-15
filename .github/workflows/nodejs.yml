@@ -25,10 +25,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - name: Promote
-      uses: s0/git-publish-subdir-action@master
-      env:
-        REPO: self
-        BRANCH: deploy
-        FOLDER: frontend/dist/
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Zip Folder
+        run: zip -r release.zip frontend/dist
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: release.zip
+        path: release.zip
+

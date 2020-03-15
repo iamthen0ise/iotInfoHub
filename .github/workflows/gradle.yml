@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
@@ -25,10 +23,8 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew clean build test
 
-    - name: Deploy
-      uses: s0/git-publish-subdir-action@master
-      env:
-        REPO: self
-        BRANCH: deploy
-        FOLDER: build/libs
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Publish artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: app.jar
+          path: build/libs/shadow-stable.jar
