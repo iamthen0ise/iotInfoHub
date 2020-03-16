@@ -43,7 +43,7 @@ fun Application.module() {
 
     routing {
         static("/static") {
-            files("frontend/dist/static/")
+            files("public_html/static")
         }
         get("/healthcheck") {
             call.respond("ok")
@@ -78,9 +78,7 @@ fun Application.module() {
         }
 
         get("/site") {
-            call.respondFile(File("frontend/dist/index.html"))
+            call.respondFile(File("public_html/index.html"))
         }
     }
-
-
 }
