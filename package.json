@@ -3,6 +3,6 @@
     "postinstall": "(cd frontend && npm install -g yarn && yarn && yarn build)"
   },
   "config": {
-    "unsafe-perm":true
+    "unsafe-perm": true
   }
 }

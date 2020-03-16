@@ -7,17 +7,20 @@ import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
-import io.ktor.features.maxAge
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.*
 import io.ktor.response.respond
+import io.ktor.response.respondFile
 import io.ktor.response.respondText
+import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.serialization.serialization
 import org.joda.time.DateTime
+import java.io.File
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
@@ -39,6 +42,9 @@ fun Application.module() {
 
 
     routing {
+        static("/static") {
+            files("frontend/dist/static/")
+        }
         get("/healthcheck") {
             call.respond("ok")
         }
@@ -70,5 +76,11 @@ fun Application.module() {
                 TemperatureService().getAll(page, limit)
             )
         }
+
+        get("/site") {
+            call.respondFile(File("frontend/dist/index.html"))
+        }
     }
+
+
 }
