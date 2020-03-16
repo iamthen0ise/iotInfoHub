@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: "Temperature"
-};
+  name: 'Temperature'
+}
 </script>

@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Temperature from "./components/Temperature.vue";
+import Temperature from './components/Temperature.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Temperature
   }
-};
+}
 </script>
 
 <style>
