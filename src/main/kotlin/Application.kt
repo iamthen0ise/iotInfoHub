@@ -77,7 +77,7 @@ fun Application.module() {
             )
         }
 
-        get("/site") {
+        get("/app") {
             call.respondFile(File("public_html/index.html"))
         }
     }
