@@ -64,7 +64,7 @@ new Vue({
                   },
                   ticks: {
                     callback: function (value) {
-                      return value + '°С'
+                      return Math.round(value) + '°С'
                     }
                   }
                 }
