@@ -1,1 +1,1 @@
-web: java -jar build/libs/shadow-0.0.1.jar
+web: java -jar iotInfoHub-1.0.0.jar
